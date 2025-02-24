@@ -1,5 +1,10 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: '404 Not Found',
+  description: 'ページが見つかりませんでした。',
+};
+
 export default function NotFoundPage() {
   return (
     <div className="flex flex-col items-center justify-center gap-8 h-screen">

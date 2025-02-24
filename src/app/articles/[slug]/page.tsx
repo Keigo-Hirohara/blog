@@ -15,6 +15,20 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ params: { slug } }));
 }
 
+export async function generateMetadata({ params }: PostPageProps) {
+  const { slug } = await params;
+  const result = GetPostBySlug(slug);
+
+  if (!result) {
+    notFound();
+  }
+
+  return {
+    title: result.frontMatter.title,
+    description: result.frontMatter.description,
+  };
+}
+
 export default async function PostPage({ params }: PostPageProps) {
   const options = {
     mdxOptions: {

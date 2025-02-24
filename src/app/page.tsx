@@ -3,6 +3,12 @@ import { Tag } from '@/components/Tag';
 import { getAllTags } from '@/libs/getAllTags';
 import { getArticlesMetadataByTag } from '@/libs/getArticlesMetadataByTag';
 import { GetLatestPosts } from '@/libs/posts';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'マインドフルエンジニア',
+  description: 'エンジニアという仕事をもっと楽しくするブログ',
+};
 
 export default function Home() {
   const posts = GetLatestPosts(6);
@@ -22,7 +28,6 @@ export default function Home() {
       <div
         style={{
           backgroundImage: `url(/images/320A1775-2.jpg)`,
-          // aspectRatio: '16/9',
           backgroundSize: 'cover',
           width: '100%',
           height: '75vh',

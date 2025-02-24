@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <header className="bg-main/90 w-full sticky top-0 h-16 flex items-center justify-between px-8">
       <Link href={'/'} className="text-2xl font-medium text-white" scroll>
-        エンジョニア
+        マインドフルエンジニア
       </Link>
       <div className="flex gap-4 items-center ">
         <div className="hidden md:flex lg:flex xl:flex">

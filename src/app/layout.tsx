@@ -16,8 +16,8 @@ import { Footer } from '@/components/Layout/Footer';
 // });
 
 export const metadata: Metadata = {
-  title: 'まきてく',
-  description: 'SREブログ',
+  title: 'マインドフルエンジニア',
+  description: 'エンジニアとしての生活をもっと楽しく',
 };
 
 const inter = Inter({ subsets: ['latin'] });

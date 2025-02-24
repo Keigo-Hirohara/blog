@@ -5,8 +5,9 @@ import { getArticlesMetadataByTag } from '@/libs/getArticlesMetadataByTag';
 import { GetPaginatedArticlesMetadata } from '@/libs/getPaginatedArticles';
 import { getLastPageNumber } from '@/libs/getTotalPageAmount';
 import { GetAllPostsMetadata } from '@/libs/posts';
-import { Metadata } from '@/types/metadata';
+import { Metadata as ArticleMetadata } from '@/types/metadata';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
 interface Props {
   searchParams: {
@@ -36,9 +37,19 @@ export async function generateStaticParams() {
   return result;
 }
 
+export async function generateMetadata({
+  searchParams,
+}: Props): Promise<Metadata> {
+  const { tag } = searchParams;
+  return {
+    title: `${!tag ? '全ての記事' : tag} | マインドフルエンジニア`,
+    description: `${!tag ? '全ての記事' : tag}の記事一覧`,
+  };
+}
+
 export default async function ArticlesPage({ searchParams }: Props) {
   const { tag, page } = await searchParams;
-  const postMetadataList: Metadata[] = tag
+  const postMetadataList: ArticleMetadata[] = tag
     ? getArticlesMetadataByTag(tag)
     : GetAllPostsMetadata();
 
