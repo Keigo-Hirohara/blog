@@ -37,7 +37,7 @@ export default function Home() {
         <div className="bg-black/70 w-full h-full flex justify-center flex-col px-8 gap-2 z-10 flex items-center break-words">
           <div className="w-4/5 flex justify-center">
             <h1 className="text-white text-3xl">
-              エンジニアって、やり込み放題。
+              エンジニア人生、もっと楽しくしない？
             </h1>
           </div>
         </div>
