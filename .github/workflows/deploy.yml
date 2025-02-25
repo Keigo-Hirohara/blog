@@ -29,9 +29,9 @@ jobs:
 
       - name: Start/Restart Next.js App with PM2
         run: |
-          pm2 describe blog > /dev/null
-          if [ $? -eq 0 ]; then
-            pm2 restart blog
-          else
-            pm2 start npm --name "blog" -- start -- -p ${{ vars.PORT }}
-          fi
+          cd /home/makizo
+          git pull origin main
+          npm ci
+          npm run build
+          pm2 delete blog || true
+          pm2 start npm --name "blog" -- start -- -p ${{ vars.PORT }}
