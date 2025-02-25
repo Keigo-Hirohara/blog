@@ -10,7 +10,12 @@ export const Header = () => {
       </Link>
       <div className="flex gap-4 items-center ">
         <div className="hidden md:flex lg:flex xl:flex">
-          <a href="#" className="p-4" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://x.com/hirokei_camel"
+            className="p-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FaXTwitter className="h-6 w-6 text-white" />
           </a>
           <a
@@ -67,7 +72,7 @@ export const Header = () => {
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="https://x.com/hirokei_camel"
                       className="flex gap-2"
                       target="_blank"
                       rel="noopener noreferrer"
