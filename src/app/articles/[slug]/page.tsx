@@ -39,7 +39,6 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const { slug } = await params;
   const result = GetPostBySlug(slug);
-  console.log(slug);
 
   if (!result) {
     notFound();
