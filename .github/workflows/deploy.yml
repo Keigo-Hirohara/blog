@@ -1,0 +1,36 @@
+name: Deploy Next.js Blog
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.20.4'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Next.js App
+        run: npm run build
+
+      - name: Start Next.js App
+        run: |
+          npm run start &
+          echo $! > .nextjs-pid
+
+      - name: Stop Previous Next.js Instance
+        run: |
+          if [ -f .nextjs-pid ]; then
+            kill $(cat .nextjs-pid) || true
+            rm .nextjs-pid
+          fi
