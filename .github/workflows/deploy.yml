@@ -24,14 +24,14 @@ jobs:
       - name: Build Next.js App
         run: npm run build
 
-      - name: Stop Previous Next.js App
-        run: |
-          if [ -f .nextjs-pid ]; then
-            kill $(cat .nextjs-pid) || true
-            rm .nextjs-pid
-          fi
+      - name: Install PM2
+        run: npm install pm2 -g
 
-      - name: Start Next.js App
+      - name: Start/Restart Next.js App with PM2
         run: |
-          npm run start-- -p ${{ vars.PORT }} &
-          echo $! > .nextjs-pid
+          pm2 describe blog > /dev/null
+          if [ $? -eq 0 ]; then
+            pm2 restart blog
+          else
+            pm2 start npm --name "blog" -- start -- -p ${{ vars.PORT }}
+          fi
