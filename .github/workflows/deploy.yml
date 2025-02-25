@@ -33,5 +33,5 @@ jobs:
 
       - name: Start Next.js App
         run: |
-          nohup npm run start -- -p ${{ vars.PORT }} > nextjs.log 2>&1 &
+          npm run start-- -p ${{ vars.PORT }} &
           echo $! > .nextjs-pid
