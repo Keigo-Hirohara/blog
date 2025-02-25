@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "create-article": "tsx scripts/create-article.ts src/contents/posts"
+    "create-article": "tsx scripts/create-article.ts src/contents/articles"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

@@ -5,11 +5,11 @@ import { FrontMatter } from '@/types/frontMatter';
 import { ArticleMetadata } from '@/types/article';
 
 // MDXファイルのディレクトリ
-const POSTS_PATH = path.join(process.cwd(), 'src/contents/posts');
+const ARTICLES_PATH = path.join(process.cwd(), 'src/contents/articles');
 
 // ファイル名（slug）の一覧を取得
 export function GetAllPostSlugs() {
-  const postFilePaths = readdirSync(POSTS_PATH).filter((path) =>
+  const postFilePaths = readdirSync(ARTICLES_PATH).filter((path) =>
     /\.mdx?$/.test(path)
   );
   return postFilePaths.map((path) => {
@@ -50,11 +50,11 @@ export function GetPostBySlug(slug: string): {
   content: string;
   frontMatter: FrontMatter;
 } | null {
-  const filePath = `src/contents/posts/${slug}.mdx`;
+  const filePath = `src/contents/articles/${slug}.mdx`;
   if (!existsSync(filePath)) {
     return null;
   }
-  const markdown = readFileSync(`src/contents/posts/${slug}.mdx`, 'utf8');
+  const markdown = readFileSync(`src/contents/articles/${slug}.mdx`, 'utf8');
 
   const { content, data } = matter(markdown);
 

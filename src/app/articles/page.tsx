@@ -10,10 +10,10 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 
 interface Props {
-  searchParams: {
+  searchParams: Promise<{
     tag: string | null;
     page: number | null;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -40,7 +40,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   searchParams,
 }: Props): Promise<Metadata> {
-  const { tag } = searchParams;
+  const { tag } = await searchParams;
   return {
     title: `${!tag ? '全ての記事' : tag} | マインドフルエンジニア`,
     description: `${!tag ? '全ての記事' : tag}の記事一覧`,
