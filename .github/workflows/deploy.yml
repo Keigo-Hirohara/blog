@@ -29,7 +29,7 @@ jobs:
 
       - name: Start/Restart Next.js App with PM2
         run: |
-          cd /home/makizo
+          cd /home/makizo/blog
           git pull origin main
           npm ci
           npm run build
