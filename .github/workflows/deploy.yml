@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    environment: Production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -23,14 +24,14 @@ jobs:
       - name: Build Next.js App
         run: npm run build
 
-      - name: Start Next.js App
-        run: |
-          npm run start &
-          echo $! > .nextjs-pid
-
-      - name: Stop Previous Next.js Instance
+      - name: Stop Previous Next.js App
         run: |
           if [ -f .nextjs-pid ]; then
             kill $(cat .nextjs-pid) || true
             rm .nextjs-pid
           fi
+
+      - name: Start Next.js App
+        run: |
+          npm run start -- -p ${{ vars.PORT }} &
+          echo $! > .nextjs-pid
