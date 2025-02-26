@@ -3,9 +3,7 @@ import { formatDateForDisplay } from '@/libs/formatDate';
 import { GetAllPostSlugs, GetPostBySlug } from '@/libs/posts';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
-// import Image from 'next/image';
 import remarkGfm from 'remark-gfm';
-import './mdx.css';
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -87,7 +85,9 @@ export default async function PostPage({ params }: PostPageProps) {
         [&>h4]:text-xl
         [&>h5]:text-lg
         [&>h6]:text-base
-        [&>p]:text-base"
+        [&>p]:text-base
+        [&_code]:text-white
+        "
         >
           <MDXRemote source={content} options={options} />
         </article>

@@ -1,0 +1,333 @@
+---
+title: '静的型付け言語とは？型があると何が嬉しいのか？'
+description: '静的型付け言語とは一体なんなのでしょうか？型があることの嬉しさをまとめてみました。'
+tags: ['プログラミング', '技術', 'TypeScript']
+date: '2025-02-26T21:13:13.710Z'
+coverImage: '/images/image2025-02-27-06-14-12.png'
+---
+
+こんにちは！まきぞうです。
+
+インターンで TypeScript を 2 年程書いてきて、型システムがあることの嬉しさが少しづつわかってきたので、静的型付け言語のメリットをまとめておきたいと思います。
+
+### この記事の想定読者
+
+- TypeScript や Go、Java などの静的型付け言語を使っているが、なぜ採用したのかが分からない人
+
+- 現場に配属されて半年未満の新人エンジニア
+
+- エンジニアインターン生
+
+### この記事を読むとあなたに起こること
+
+- 静的型付け言語がなぜあなたの開発現場に採用されているのかがわかる
+
+- VSCode で発生する些細な型不一致エラーの仕組みが理解できる
+
+- 型を使うことの何が嬉しいのかがわかる
+
+- エンジニアの技術面接で話すネタができる
+
+今までなんとなく使っていた技術も、なぜそれが使われていて、そしてどうやって開発現場に貢献しているのかを、これから一緒に学んでいきましょう！
+
+## 静的型付けと動的型付け
+
+ではまず、静的型付けとは一体なんなのでしょうか？
+
+型とは、人間がプログラム上で扱うデータの意味と認識してもらうと良いでしょう。
+
+- `日時`というデータを扱いたければ、Date クラス、またはオブジェクトを使うでしょう
+
+- `年齢`というデータを扱いたければ、0 以上の整数という型を使うでしょう
+
+- `名前`というデータを扱いたければ、String という型を使うでしょう
+
+このような型をコーディングの時点で人間が指定するのが、静的型付けです。
+
+逆に、動的型付けとはなんなのでしょうか？
+
+扱うデータの型をコーディングの時点で人間が指定しないで、実行時に実行環境(分からなくて良いですが、ランタイムやインタプリタ)に自動的に決定してもらう形式を動的型付けと言います。
+
+### 静的型付け言語と動的型付け言語
+
+では、静的型付け言語と動的型付け言語の違いについて見ていきましょう。
+
+動的型付け言語にはどんな言語があるのかというと
+
+- Ruby
+
+- JavaScript
+
+- Python
+
+- Lua(NeoVim のカスタム設定などに使われる)
+
+静的型付け言語にはどんな言語があるのかというと
+
+- Java
+
+- C
+
+- C++
+
+- TypeScript
+
+- Rust
+
+- Go
+
+- Swift
+
+両者の違いは、型の決定をいつするかです。
+
+- 静的型付け言語: コンパイルするときに型がチェック、決定される
+
+- 動的型付け言語: 実行するときに型がチェック、決定される
+
+何を言っているのか説明します。
+
+プログラムが実行されるまでのフローは以下のようになっています。
+
+1. コーディング: 人間がファイルにコードを書き込んでいく
+
+2. コンパイル: 実行環境がソースコードを CPU が実行可能なファイルに変換していく
+
+3. 実行: 実行可能な形式のファイルを CPU に実行させる
+
+より早いタイミングで型がチェック、決定されるのが静的型付け言語であるという認識で良いと思います。
+
+![](/images/静的型付け-1024x576.jpg)
+
+### コーディング中に型の不一致エラーが発生してくれるのは、静的型付け言語の機能なのか？
+
+静的型付け言語はコンパイル時にチェックによって型の不一致エラーを教えてくれます。
+
+しかし、TypeScript や Go でコーディングしていると、コンパイルしてもないのに型の不一致エラーが発生してくれることがあります。
+
+![](/images/スクリーンショット-2024-11-13-5.50.06-1024x164.png)
+
+これは一体なんなのでしょうか？
+
+静的型付け言語の機能なのでしょうか？
+
+静的型付け言語というより、厳密にいうと LSP(Language Server Protocol: 言語サーバー)という機能によって実現されています。
+
+例えば、VSCode などのエディタが TypeScript の言語をサポートしていると、TypeScript 用の LSP が搭載されています。
+
+この LSP のおかげで、エディタ上でリアルタイムに型チェックが行われ、コンパイル前に前に型の不一致エラーを発見できるというわけなのです。
+
+ちなみに、LSP がリアルタイムで型エラーを示してくれるのは、静的型付け言語が型の情報を把握できるからなので、コーディング中に型の不一致エラーを表示してくれるのは`静的型付け言語 + LSPのおかげ`だったのです！
+
+ちなみに言語のサポートをしていないエディタだと型チェックがリアルタイムで行われないので、Vim などのカスタマイズしてエディタを使っている人たちは自前で LSP をインストールする必要があるのです。(難しい...)
+
+## 型があると何が嬉しいのか？
+
+それでは、静的型付け言語のメリットについて話していきます。
+
+- コードのエラーを、実行時ではなくコンパイルのタイミングで早期発見することができる → 開発効率が高くなる
+
+- ソースコードからインターフェース(どうやって使うものなのか)が把握できる → コードを理解しやすい
+
+- コンパイル時点で、どのくらいのメモリを使うのかがわかる → コードを最適化しやすい
+
+### コードのエラーをコンパイルのタイミングで発見することができる
+
+まずは型チェックがコンパイル(LSP を併用すればコーディング)の時点で行われ、型の不一致エラーが早期発見できるというのは大きなメリットでしょう。
+
+毎回コンパイル → 実行という作業をしなくてもエラーを表示してくれるのは、開発生産性の大幅な向上につながります。
+
+例を見ていきましょう。
+
+#### 例: JavaScript ↔︎ TypeScript
+
+こちらでは、空のオブジェクトを定義して、その中に存在しないメソッドを呼び出しています。
+
+```
+function getDayOfWeek(date) {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  return days[date.getDay()];
+}
+
+console.log(getDayOfWeek(3)); // TypeError: date.getDay is not a function
+```
+
+実行してみると
+
+```
+$ node index.js
+index.js:11
+  return days[date.getDay()];
+                   ^
+
+TypeError: date.getDay is not a function
+    at getDayOfWeek (index.js:11:20)
+    at Object.<anonymous> (index.js:14:13)
+    at Module._compile (node:internal/modules/cjs/loader:1364:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1422:10)
+    at Module.load (node:internal/modules/cjs/loader:1203:32)
+    at Module._load (node:internal/modules/cjs/loader:1019:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12)
+    at node:internal/main/run_main_module:28:49
+
+Node.js v18.20.4
+```
+
+このように、実行して初めてエラーに気づきます。
+
+ちなみにエディタ上では型の不一致エラーは表示されていませんでした。
+
+![](/images/スクリーンショット-2024-11-13-6.08.39-1024x526.png)
+
+一方、TypeScript で同じコードを書いていきましょう。
+
+```
+function getDayOfWeek(date: Date): string {
+  const days = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  return days[date.getDay()];
+}
+
+console.log(getDayOfWeek(3));
+```
+
+```
+$ tsc typeCheck.ts
+
+typeCheck.ts:14:26 - error TS2345: Argument of type 'number' is not assignable to parameter of type 'Date'.
+
+14 console.log(getDayOfWeek(3));
+                            ~
+
+
+Found 1 error in typeCheck.ts:14
+```
+
+すると、引数として Date が期待されているが、渡されている引数が int になっていると型の不一致エラーが発生しています。
+
+![](/images/スクリーンショット-2024-11-13-6.10.59-1024x412.png)
+
+※: TypeScript でも strict モードを無効にしたり、any 型を使用したりすると同様の状況が発生する可能性があります。
+
+### ソースコードからインターフェースが理解できる
+
+次に、ソースコード上に型が明示されているため、関数やメソッドを使う時にインターフェースをどう使うかがすぐに理解できるというメリットがあります。
+
+JavaScript
+
+```
+function calculateTotalPrice(items, discount) {
+  let total = 0;
+  for (let item of items) {
+    total += item.price * item.quantity;
+  }
+  return total * (1 - discount);
+}
+
+const cart = [
+  { name: "T-shirt", price: 15.99, quantity: 2 },
+  { name: "Jeans", price: 39.99, quantity: 1 }
+];
+
+const finalPrice = calculateTotalPrice(cart, 0.1);
+console.log(`Total price: $${finalPrice}`);
+```
+
+こちらのソースコード、calculateTotalPrice にどんなデータを渡したらどんな結果が返ってくるかが全く書かれていません。。。
+
+TypeScript
+
+```
+interface CartItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+function calculateTotalPrice(items: CartItem[], discount: number): number {
+  let total = 0;
+  for (let item of items) {
+    total += item.price * item.quantity;
+  }
+  return total * (1 - discount);
+}
+
+const cart: CartItem[] = [
+  { name: "T-shirt", price: 15.99, quantity: 2 },
+  { name: "Jeans", price: 39.99, quantity: 1 }
+];
+
+const finalPrice: number = calculateTotalPrice(cart, 0.1);
+console.log(`Total price: $${finalPrice}`);
+```
+
+一方、TypeScript で全く同じコードを書いていくと、入力(引数)に何を渡したら、出力として何が返ってくるのかが一目でわかります。
+
+(今回の場合だったら、CartItem 配列と割引率を渡したら総額の整数値が返ってくることが 1 行で分かる)
+
+つまり、この関数をどうやって使うのかを示すインターフェースが一瞬でわかるのです。
+
+コードを読む上で、実装ではなくインターフェースのみを読むことは、開発生産性の向上に貢献します。
+
+「世界一流エンジニアの思考法」という書籍でも紹介されているので、ぜひ読んでみてください。
+
+[https://amzn.asia/d/eZIWXqA](https://amzn.asia/d/eZIWXqA)
+
+### コンパイル時点で、どのくらいのメモリを使うのかがわかる
+
+あらかじめ型を指定しておくことにより、プログラムに必要なメモリ使用量を予測することができます。
+
+```
+// 固定サイズの配列
+const fixedArray: number[] = new Array(1000).fill(0);
+
+// オブジェクト型の定義
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+// ユーザーオブジェクトの配列
+const users: User[] = [];
+```
+
+この例では、`fixedArray`は 1000 個の数値を格納する配列で、そのメモリ使用量はおおよそ 8000 バイト（1000 \* 8 バイト）と予測できます。`User`型のオブジェクトは、各プロパティのサイズから概算のメモリ使用量を推測できます。
+
+メモリの使用量を予測することで、以下のようなことが可能になってきます。
+
+- 無駄にメモリ使用量を大きくしているコードがないかをチェックすることができる → 最適化できる
+
+- プログラムの実行環境に使うサーバーのスペックを見積もることができる
+
+## まとめ: コードの堅牢性、可読性を維持するためにも、静的型付け言語を使っていこう！
+
+さて、今回のまとめ。
+
+覚えるべき箇所は以下です。
+
+- 静的型付け言語はコンパイル時に型チェックされ、動的型付け言語は実行時に型チェックされる。
+
+- 静的型付け言語のメリットは
+
+  - インターフェースが明確にできることによるコードの可読性向上
+
+  - LSP との併用によりリアルタイムで型チェックができる
+
+  - メモリ使用量を予測してコードを最適化できる
+
+最後まで読んでいただき、ありがとうございました！
