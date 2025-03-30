@@ -44,7 +44,7 @@ export default function Home() {
       </div>
       <div className="w-4/5 grid gap-8">
         <h1 className="text-5xl text-gray-700">最新記事</h1>
-        <div className="w-full flex flex-wrap gap-16">
+        <div className="w-full flex flex-wrap gap-16 justify-center">
           {posts.map((post) => (
             <ArticleCard key={post.slug} {...post} />
           ))}
