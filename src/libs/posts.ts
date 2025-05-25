@@ -89,10 +89,6 @@ function convertToFrontMatter({
     console.error(`Invalid tags provided for ${slug}`);
     throw new Error('Invalid tags provided');
   }
-  if (!data.coverImage) {
-    console.error(`No coverImage provided for ${slug}`);
-    throw new Error('No coverImage provided');
-  }
   if (!data.description) {
     console.error(`No description provided for ${slug}`);
     throw new Error('No description provided');
@@ -102,6 +98,8 @@ function convertToFrontMatter({
     description: data.description,
     date: data.date,
     tags: data.tags,
-    coverImage: data.coverImage,
+    coverImage: !!data.coverImage
+      ? data.coverImage
+      : '/images/default-cover.png',
   };
 }
