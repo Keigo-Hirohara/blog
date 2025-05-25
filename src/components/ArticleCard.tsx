@@ -33,7 +33,7 @@ export const ArticleCard: FC<ArticleMetadata> = ({
           </p>
           <Image
             alt={title}
-            src={coverImage}
+            src={!!coverImage ? coverImage : '/images/default-cover.png'}
             width="0"
             height="0"
             layout="responsive"
