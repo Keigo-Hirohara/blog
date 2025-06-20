@@ -6,8 +6,9 @@ import { GetLatestPosts } from '@/libs/posts';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'マインドフルエンジニア',
-  description: 'エンジニアという仕事をもっと楽しくするブログ',
+  title: 'アプリ開発者のための実践的SRE',
+  description:
+    '開発者としてアプリを作る人間が、SREに入門して信頼性を向上できるようになるブログ',
 };
 
 export default function Home() {
@@ -37,7 +38,7 @@ export default function Home() {
         <div className="bg-black/70 w-full h-full flex justify-center flex-col px-8 gap-2 z-10 flex items-center break-words">
           <div className="w-4/5 flex justify-center">
             <h1 className="text-white text-3xl">
-              エンジニア人生、もっと楽しくしない？
+              システムが信頼できると、作る側もすごく安心。
             </h1>
           </div>
         </div>
