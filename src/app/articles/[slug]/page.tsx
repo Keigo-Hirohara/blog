@@ -75,6 +75,7 @@ export default async function PostPage({ params }: PostPageProps) {
         <article
           className="
         prose
+        mt-16
         max-w-full
         break-words
         mdxRemote
@@ -86,6 +87,8 @@ export default async function PostPage({ params }: PostPageProps) {
         [&>h5]:text-lg
         [&>h6]:text-base
         [&>p]:text-base
+        [&>p]:leading-[1.9]
+        [&>p]:mt-[1.5rem]
         [&_code]:text-white
         "
         >
