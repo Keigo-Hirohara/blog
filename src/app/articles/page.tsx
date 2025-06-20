@@ -42,7 +42,7 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const { tag } = await searchParams;
   return {
-    title: `${!tag ? '全ての記事' : tag} | マインドフルエンジニア`,
+    title: `${!tag ? '全ての記事' : tag} | 開発者のための実践的SRE`,
     description: `${!tag ? '全ての記事' : tag}の記事一覧`,
   };
 }

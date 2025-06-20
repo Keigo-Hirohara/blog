@@ -6,8 +6,9 @@ import { Noto_Sans_JP } from 'next/font/google';
 import { Footer } from '@/components/Layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'マインドフルエンジニア',
-  description: 'エンジニアとしての生活をもっと楽しく',
+  title: '開発者のための実践的なSRE',
+  description:
+    '開発者としてアプリを作る人間が、SREに入門して信頼性を向上できるようになるブログ',
 };
 
 const notoSansJp = Noto_Sans_JP({ subsets: ['latin'] });
