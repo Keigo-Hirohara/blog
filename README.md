@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blog
 
-## Getting Started
+このリポジトリは、[あなたの名前]のブログのソースコードです。
 
-First, run the development server:
+## 目次
+
+- [Blog](#blog)
+  - [目次](#目次)
+  - [必要条件](#必要条件)
+  - [インストール](#インストール)
+  - [ローカルでの開発](#ローカルでの開発)
+  - [記事の書き方](#記事の書き方)
+    - [記事の生成方法](#記事の生成方法)
+    - [記事のメタデータ](#記事のメタデータ)
+    - [ビルド](#ビルド)
+    - [デプロイ](#デプロイ)
+
+## 必要条件
+
+- Node.js (v18.x 以上を推奨)
+- npm または yarn
+
+## インストール
+
+リポジトリをクローンし、依存関係をインストールします。
+
+```bash
+git clone https://github.com/your-username/blog.git
+cd blog
+npm install
+# or
+# yarn install
+```
+
+## ローカルでの開発
+
+以下のコマンドを実行すると、開発サーバーが起動します。
+ブラウザで `http://localhost:3000` を開いて確認してください。
 
 ```bash
 npm run dev
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 記事の書き方
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ブログ記事は `posts` ディレクトリに Markdown ファイルとして保存されています。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 記事の生成方法
 
-## Learn More
+記事の生成スクリプトを用意しているので、下記のコマンドで生成してください。
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run create-article .
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 記事のメタデータ
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+記事の Markdown ファイルの先頭には、以下のような `frontmatter` と呼ばれるメタデータを YAML 形式で記述します。
 
-## Deploy on Vercel
+```yaml
+---
+title: '記事のタイトル'
+date: 'YYYY-MM-DD'
+slug: 'post-slug'
+tags: ['tag1', 'tag2']
+excerpt: '記事の要約'
+---
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+各項目の詳細は以下の通りです。
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| キー      | 型         | 必須 | 説明                                                                                                         |
+| :-------- | :--------- | :--- | :----------------------------------------------------------------------------------------------------------- |
+| `title`   | `string`   | ✅   | 記事のタイトル。                                                                                             |
+| `date`    | `string`   | ✅   | 記事の公開日。`YYYY-MM-DD` 形式で記述します。この日付順に記事が並びます。                                    |
+| `slug`    | `string`   | ✅   | 記事の URL になる部分。他の記事と重複しないユニークな値を設定します。                                        |
+| `tags`    | `string[]` |      | 記事に関連するタグの配列。                                                                                   |
+| `excerpt` | `string`   |      | 記事の要約。記事一覧ページなどで表示されます。指定しない場合は、本文の冒頭が自動的に使われることがあります。 |
+
+### ビルド
+
+静的なファイルを生成するには、以下のコマンドを実行します。
+生成されたファイルは `out` (または `.next`) ディレクトリに出力されます。
+
+```bash
+npm run build
+```
+
+### デプロイ
+
+このプロジェクトは Vercel や Netlify などのホスティングサービスに簡単にデプロイできます。
+GitHub リポジトリと連携し、main ブランチへのプッシュをトリガーに自動でビルドとデプロイが実行されるように設定するのが一般的です。
